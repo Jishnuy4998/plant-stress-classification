@@ -6,10 +6,10 @@ A Python/PyTorch project that classifies leaf images as healthy or stressed usin
 
 ## Start here
 
-- [Main training and evaluation code](plant_stress_train.py)
-- [Saved numerical results](metrics.json)
-- [Confusion matrix](confusion_matrix.png) and [ROC curve](roc_curve.png)
-- [Single-image prediction](predict_single.py) and [Grad-CAM visualization](gradcam.py)
+- [Main training and evaluation code](scripts/plant_stress_train.py)
+- [Saved numerical results](outputs/metrics.json)
+- [Confusion matrix](outputs/confusion_matrix.png) and [ROC curve](outputs/roc_curve.png)
+- [Single-image prediction](scripts/predict_single.py) and [Grad-CAM visualization](scripts/gradcam.py)
 
 ## My implementation
 
@@ -31,14 +31,14 @@ These are the existing project outputs, not a new training run performed for thi
 | F1 | 98.33% |
 | ROC-AUC | 0.9942 |
 
-![Confusion matrix](confusion_matrix.png)
-![ROC curve](roc_curve.png)
+![Confusion matrix](outputs/confusion_matrix.png)
+![ROC curve](outputs/roc_curve.png)
 
-Training diagnostics: [loss](loss_curve.png) · [validation accuracy](val_accuracy_curve.png).
+Training diagnostics: [loss](outputs/loss_curve.png) · [validation accuracy](outputs/val_accuracy_curve.png).
 
 ## Use the trained model without retraining
 
-Download `plant_stress_model.pth` from the [model release](https://github.com/Jishnuy4998/plant-stress-classification/releases/tag/v1.0.0) and place it in the project root beside `predict_single.py`. Install the requirements, then run `python predict_single.py path/to/leaf.jpg`. Dataset downloads are only necessary for training. The original checkpoint loads successfully and a sample prediction was checked; it was not retrained for this upload.
+Download `plant_stress_model.pth` from the [model release](https://github.com/Jishnuy4998/plant-stress-classification/releases/tag/v1.0.0) and place it in the project root (alongside the README). Install the requirements, then run `python scripts/predict_single.py path/to/leaf.jpg`. Dataset downloads are only necessary for training. The original checkpoint loads successfully and a sample prediction was checked; it was not retrained for this upload.
 
 ## Running the project
 
@@ -48,7 +48,7 @@ Use a Python environment compatible with the package versions in requirements.tx
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-python download_datasets.py
+python scripts/download_datasets.py
 ```
 
 The original download script fetches [PlantVillage on Kaggle](https://www.kaggle.com/datasets/emmarex/plantdisease) and [PlantDoc on Kaggle](https://www.kaggle.com/datasets/abdulhasibuddin/plant-doc-dataset). Follow Kaggle’s access and licensing requirements. If an archive includes an extra enclosing directory, arrange the PlantVillage class folders directly under `data/downloads/plantvillage/` before relabeling:
@@ -61,13 +61,13 @@ data/downloads/plantvillage/
 ```
 
 ```sh
-python relabel_to_binary.py
-python plant_stress_train.py
-python predict_single.py path/to/leaf.jpg
-python gradcam.py path/to/leaf.jpg
+python scripts/relabel_to_binary.py
+python scripts/plant_stress_train.py
+python scripts/predict_single.py path/to/leaf.jpg
+python scripts/gradcam.py path/to/leaf.jpg
 ```
 
-Training writes a local `plant_stress_model.pth` checkpoint and evaluation files in `outputs/`. This repository stores the original evaluation files at its root for easy review. Raw datasets and the local environment are excluded. The large trained checkpoint is available separately in the model release. Download that checkpoint or train the model before running prediction or Grad-CAM. Some supplementary visualization scripts contain example image paths that must be changed to an image in your downloaded data.
+Training writes a local `plant_stress_model.pth` checkpoint and evaluation files in `outputs/`. This repository stores the original evaluation files in `outputs/` for easy review. Raw datasets and the local environment are excluded. The large trained checkpoint is available separately in the model release. Download that checkpoint or train the model before running prediction or Grad-CAM. Some supplementary visualization scripts contain example image paths that must be changed to an image in your downloaded data.
 
 ## Scope and limitations
 
@@ -80,6 +80,13 @@ Training writes a local `plant_stress_model.pth` checkpoint and evaluation files
 
 ## Files
 
-`relabel_to_binary.py` prepares labels; `plant_stress_train.py` trains and evaluates; `predict_single.py` predicts one image; `gradcam.py` and `visualize_layers.py` inspect model responses. The remaining scripts create preprocessing examples and a schematic diagram.
+- `scripts/`: training, data preparation, prediction, and visualization code.
+- `outputs/`: saved metrics and evaluation figures.
+- Root: README, requirements, and ignore rules.
+
+Run all commands from the repository root; data and checkpoint paths remain relative to that directory.
+
+
+`scripts/relabel_to_binary.py` prepares labels; `scripts/plant_stress_train.py` trains and evaluates; `scripts/predict_single.py` predicts one image; `scripts/gradcam.py` and `scripts/visualize_layers.py` inspect model responses. The remaining scripts create preprocessing examples and a schematic diagram.
 
 Dataset images and pretrained model weights belong to their respective providers. Consult their terms before reuse.
