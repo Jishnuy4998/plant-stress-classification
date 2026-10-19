@@ -36,6 +36,10 @@ These are the existing project outputs, not a new training run performed for thi
 
 Training diagnostics: [loss](loss_curve.png) · [validation accuracy](val_accuracy_curve.png).
 
+## Use the trained model without retraining
+
+Download `plant_stress_model.pth` from the [model release](https://github.com/Jishnuy4998/plant-stress-classification/releases/tag/v1.0.0) and place it in the project root beside `predict_single.py`. Install the requirements, then run `python predict_single.py path/to/leaf.jpg`. Dataset downloads are only necessary for training. The original checkpoint loads successfully and a sample prediction was checked; it was not retrained for this upload.
+
 ## Running the project
 
 Use a Python environment compatible with the package versions in requirements.txt (the versions recorded in the original local environment).
@@ -63,7 +67,7 @@ python predict_single.py path/to/leaf.jpg
 python gradcam.py path/to/leaf.jpg
 ```
 
-Training writes a local `plant_stress_model.pth` checkpoint and evaluation files in `outputs/`. This repository stores the original evaluation files at its root for easy review. Raw datasets, the local environment, and the large trained checkpoint are excluded. Train the model before running prediction or Grad-CAM. Some supplementary visualization scripts contain example image paths that must be changed to an image in your downloaded data.
+Training writes a local `plant_stress_model.pth` checkpoint and evaluation files in `outputs/`. This repository stores the original evaluation files at its root for easy review. Raw datasets and the local environment are excluded. The large trained checkpoint is available separately in the model release. Download that checkpoint or train the model before running prediction or Grad-CAM. Some supplementary visualization scripts contain example image paths that must be changed to an image in your downloaded data.
 
 ## Scope and limitations
 
