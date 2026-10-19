@@ -71,6 +71,7 @@ Training writes a local `plant_stress_model.pth` checkpoint and evaluation files
 
 ## Scope and limitations
 
+- Based on my visual inspection, many PlantVillage examples show obvious visible damage or disease symptoms; I estimate that only around 10% are visually ambiguous. This is an informal estimate, not a measured dataset statistic. Evaluating and training on a dataset with subtler symptoms and early-stage disease would help assess and potentially improve performance on harder cases.
 - Evaluation uses a random image-level split of PlantVillage, not an independent field dataset or a split grouped by plant, leaf, or source. These results do not establish field performance.
 - PlantDoc is downloaded by the helper script, but the main training script does not evaluate it. No PlantDoc results are claimed here.
 - Disease categories are combined into one stressed label; the model does not identify individual diseases or directly measure abiotic stress.
