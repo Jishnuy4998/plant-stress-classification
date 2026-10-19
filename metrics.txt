@@ -1,0 +1,8 @@
+=== TEST METRICS ===
+accuracy: 0.9722311914756215
+precision: 0.9941084053417125
+recall: 0.9727132974634897
+f1_score: 0.9832944832944833
+roc_auc: 0.9941940543016637
+train_class_counts: [2235, 12211]
+class_names: ['healthy', 'stressed']
